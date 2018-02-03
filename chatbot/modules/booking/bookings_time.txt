@@ -1,0 +1,142 @@
+[
+    {
+        "day": "Monday",
+        "date": "2017-01-29",
+        "times": {
+                "0900": false,
+                "1000": false,
+                "1100": false,
+                "1200": false,
+                "1300": false,
+                "1400": false,
+                "1500": false,
+                "1600": false
+            }
+    },
+    {
+        "day": "Tuesday",
+        "date": "2017-01-30",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Wednesday",
+        "date": "2017-01-31",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Thursday",
+        "date": "2017-02-01",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Friday",
+        "date": "2017-02-02",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Monday",
+        "date": "2017-02-05",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Tuesday",
+        "date": "2017-02-06",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Wednesday",
+        "date": "2017-02-07",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Thursday",
+        "date": "2017-02-08",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    },
+    {
+        "day": "Friday",
+        "date": "2017-02-09",
+        "times": {
+            "0900": false,
+            "1000": false,
+            "1100": false,
+            "1200": false,
+            "1300": false,
+            "1400": false,
+            "1500": false,
+            "1600": false
+        }
+    }
+]
