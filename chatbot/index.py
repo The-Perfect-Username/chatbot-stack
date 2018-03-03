@@ -4,9 +4,9 @@ from nltk import ngrams
 import re
 from BowDocument import BowDocument
 
-from Training import training_data
+from TrainingData import training_data
 
-corpus_words = {}
+corpus_terms = {}
 response_messages = {}
 context_messages = {}
 
