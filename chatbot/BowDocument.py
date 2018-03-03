@@ -1,53 +1,60 @@
-import os
-import math
-import itertools
 from nltk.stem.porter import *
-import xml.etree.ElementTree as ET
+from nltk import ngrams
+
+'''
+1: Collect all of the training dataset
+2: Loop through the training data and process the queries
+3: Process the queries by stemming and counting the ngrams
+4: Assign the ngrams to a bag of words with a key of the classification
+5: Create a dictionary with the ngrams as the key and the count as a the value
+'''
 
 class BowDocument:
-
-    def __init__(self, classification):
-        # Porter Stemmer object for stemming
+    def __init__(self):
+        self.tokens = []
         self.stemmer = PorterStemmer()
-        self.classification = classification
-        # Term frequency map
-        self.term_freq_map = {}
-        # Length of each set of queries
-        self.doclen = 0
-        # BM25 score
-        self.bm25 = 0
+        self.corpus_length = 0
+        self.corpus_terms = {}
 
-    def get_freq_word_map(self):
-        return self.term_freq_map
+    def start(self, queries=[]):
+        if len(queries) == 0:
+            return
 
-    def add_term(self, term):
-        self.term_freq_map[term] = 1
+        for query in queries:
+            stemmed_words = self.create_stem_words(query)
+            self.create_bag_of_words(stemmed_words)
 
-    def term_count(self, term):
-        term = self.stem_word_by_snowball(term)
-        if term not in self.get_stop_words():
-            if term in self.term_freq_map:
-                self.doclen += 1
-                self.term_freq_map[term] += 1
+        self.process_corpus(self.tokens)
+
+
+    def create_stem_words(self, words=None):
+        if words is None:
+            return
+        return [self.stemmer.stem(word) for word in words.split()]
+
+    def create_bag_of_words(self, stemmed_words):
+        self.tokens.extend(stemmed_words)
+
+        if len(stemmed_words) > 1:
+            self.find_ngrams(stemmed_words)
+
+        return self.tokens
+
+    def process_corpus(self, tokens=[]):
+        for stemmed_word in tokens:
+            if stemmed_word not in self.corpus_terms:
+                self.corpus_length += 1
+                self.corpus_terms[stemmed_word] = 1
             else:
-                self.doclen += 1
-                self.add_term(term)
+                self.corpus_length += 1
+                self.corpus_terms[stemmed_word] += 1
 
-    def get_doc_len(self):
-        return self.doclen
+    def find_ngrams(self, stemmed_words):
+        len_of_stemmed_words = len(stemmed_words)
 
-    # Stem the terms
-    def stem_word_by_snowball(self, word):
-        return self.stemmer.stem(word)
+        if len_of_stemmed_words > 1:
+            for i in range(2, 4):
+                if (len_of_stemmed_words >= i):
+                    self.tokens.extend([' '.join(n) for n in ngrams(stemmed_words, i)])
 
-    def get_doc_length(self):
-        return self.doclen
-
-    def get_class(self):
-        return self.classification
-
-    def set_bm25(self, bm25):
-        self.bm25 = bm25
-
-    def get_bm25(self,):
-        return self.bm25
+        return self.tokens

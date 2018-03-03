@@ -1,10 +1,10 @@
-training_data = []
+training_data = {}
 
 suburbs = ['taringa', 'indooroopilly', 'toowong']
 
 current_context = None
 
-training_data.append(
+training_data.update(
     {
         "do_you_deliver_to_me": {
             "queries": [
@@ -17,7 +17,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "do_you_deliver": {
             "queries": [
@@ -31,7 +31,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "delivery_suburbs": {
             "queries": [],
@@ -42,7 +42,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "deliveries_yes": {
             "queries": ["Yes", "Confirm", "Affirmative", "Indeed", "Certainly", "Sure", "Yes thanks"],
@@ -52,7 +52,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "order_online": {
             "queries": [
@@ -70,7 +70,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "ordering_alternatives": {
             "queries": [
@@ -85,7 +85,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "deliveries_no": {
             "queries": ["No", "Negative", "Not at all", "Nope", "No thanks"],
@@ -95,7 +95,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         "company_name": {
             "queries": [
@@ -112,7 +112,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         'company_location': {
             "queries": [
@@ -130,7 +130,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         'company_service': {
             "queries": [
@@ -155,7 +155,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         'opening_hours': {
             "queries": [
@@ -174,7 +174,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         'contact_number': {
             "queries": [
@@ -194,7 +194,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         'contact_email': {
             "queries": [
@@ -211,7 +211,7 @@ training_data.append(
     }
 )
 
-training_data.append(
+training_data.update(
     {
         'contact_info': {
             "queries": [
