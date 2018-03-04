@@ -16,7 +16,7 @@ class BowDocument:
         self.corpus_length = 0
         self.corpus_terms = {}
 
-    def start(self, queries=[]):
+    def classify(self, queries=[]):
         if len(queries) == 0:
             return
 
@@ -25,7 +25,6 @@ class BowDocument:
             self.create_bag_of_words(stemmed_words)
 
         self.process_corpus(self.tokens)
-
 
     def create_stem_words(self, words=None):
         if words is None:

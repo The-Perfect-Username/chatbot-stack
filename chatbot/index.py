@@ -5,16 +5,33 @@ import re
 from BowDocument import BowDocument
 
 from TrainingData import training_data
+from TrainingSet import TrainingSet
 
-corpus_terms = {}
 response_messages = {}
 context_messages = {}
+classifier = {}
 
 for data in training_data:
     queries = training_data[data]['queries']
     B = BowDocument()
-    B.start(queries=queries)
+    B.classify(queries=queries)
+    classifier[data] = {
+        'corpus_terms': B.corpus_terms,
+        'corpus_length': B.corpus_length
+        }
 
+
+query = "Can you deliver to my location?"
+Query = BowDocument()
+Query.classify(queries=[query])
+query = Query.corpus_terms
+
+
+for classification_label in classifier:
+    if classifier[classification_label]['corpus_length'] > 0:
+        print (classification_label)
+        TS = TrainingSet()
+        print(TS.start(classification_label=classification_label, training_data=classifier, stemmed_query_terms=query))
 
 # stemmer = PorterStemmer()
 # classes = list(set(next(iter(data)) for data in training_data))
