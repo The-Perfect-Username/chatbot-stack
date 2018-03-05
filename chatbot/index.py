@@ -21,17 +21,21 @@ for data in training_data:
         }
 
 
-query = "Can you deliver to my location?"
+query = "I would like to order something online"
 Query = BowDocument()
 Query.classify(queries=[query])
 query = Query.corpus_terms
 
-
+training_set = {}
 for classification_label in classifier:
     if classifier[classification_label]['corpus_length'] > 0:
-        print (classification_label)
         TS = TrainingSet()
-        print(TS.start(classification_label=classification_label, training_data=classifier, stemmed_query_terms=query))
+        training_set.update({
+            classification_label: TS.start(classification_label=classification_label, training_data=classifier, stemmed_query_terms=query)
+        })
+
+print (training_set)
+
 
 # stemmer = PorterStemmer()
 # classes = list(set(next(iter(data)) for data in training_data))

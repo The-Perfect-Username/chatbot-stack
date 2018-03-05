@@ -7,6 +7,7 @@ class TrainingSet:
         self.corpus_terms = {}
         self.training_data = {}
         self.total_len_avg = 0
+        self.corpus_length = 0
         self.k1 = 1.2 #used
         self.k2 = 100 #used
         self.b = 0.75 #used
@@ -59,31 +60,50 @@ class TrainingSet:
             __r__ is currently always set to 0
             https://en.wikipedia.org/wiki/Okapi_BM25
             '''
+
             __f__ = self.corpus_terms[term] if term in self.corpus_terms else 0.0
             __qf__ = self.stemmed_query_terms[term] if term in self.stemmed_query_terms else 0.0
-            # Number of documents containing query term
             __n__ = shared_terms[term] if term in shared_terms else 0.0
-
-
-            print("__n__ {}".format(__n__))
-            print("__r__ {}".format(__r__))
-
-            part1 = ( __r__ + 0.5 ) / ( __R__ - __r__ + 0.5 )
-            part2 = ( __n__ - __r__ + 0.5 ) / ( __N__ - __n__ - __R__ + __r__ + 0.5 )
-            part3 = (((self.k1 + 1 ) * __f__ ) / ( __K__ + __f__ ))
-            part4 = (((self.k2 + 1) * __qf__ ) / ( self.k2 + __qf__ ))
             #
-            # print("part1 {}".format(part1))
-            # print("part2 {}".format(part2))
-            # print("part3 {}".format(part3))
-            # print("part4 {}".format(part4))
+            # print ("__f__ {}".format(__f__))
+            # print ("__qf__ {}".format(__qf__))
+            # print ("__n__ {}".format(__n__))
 
-            alg = math.log(part1 / part2) * part3 * part4
+            IDF = math.log((__N__ - __n__ + 0.5) / ( __n__ + 0.5))
 
-            sum_of_bm25 += alg
+            top = __f__ * (self.k1 + 1)
+            bottom = __f__ + self.k1 * (1-self.b+self.b*(self.get_doc_len_avg(classification_label)))
 
-        # print('\n')
+            sum_of_bm25 += IDF * (top/bottom)
+
         return sum_of_bm25
+
+
+        #     __f__ = self.corpus_terms[term] if term in self.corpus_terms else 0.0
+        #     __qf__ = self.stemmed_query_terms[term] if term in self.stemmed_query_terms else 0.0
+        #     # Number of documents containing query term
+        #     __n__ = shared_terms[term] if term in shared_terms else 0.0
+        #
+        #
+        #     print("__n__ {}".format(__n__))
+        #     print("__r__ {}".format(__r__))
+        #
+        #     part1 = ( __r__ + 0.5 ) / ( __R__ - __r__ + 0.5 )
+        #     part2 = ( __n__ - __r__ + 0.5 ) / ( __N__ - __n__ - __R__ + __r__ + 0.5 )
+        #     part3 = (((self.k1 + 1 ) * __f__ ) / ( __K__ + __f__ ))
+        #     part4 = (((self.k2 + 1) * __qf__ ) / ( self.k2 + __qf__ ))
+        #     #
+        #     # print("part1 {}".format(part1))
+        #     # print("part2 {}".format(part2))
+        #     # print("part3 {}".format(part3))
+        #     # print("part4 {}".format(part4))
+        #
+        #     alg = math.log(part1 / part2) * part3 * part4
+        #
+        #     sum_of_bm25 += alg
+        #
+        # # print('\n')
+        # return sum_of_bm25
 
     ## Records the terms that are shared across several documents
     ## in the same dictionary

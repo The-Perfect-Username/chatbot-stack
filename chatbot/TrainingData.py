@@ -42,15 +42,15 @@ training_data.update(
     }
 )
 
-training_data.update(
-    {
-        "deliveries_yes": {
-            "queries": ["Yes", "Confirm", "Affirmative", "Indeed", "Certainly", "Sure", "Yes thanks"],
-            "response": 'You can order online from http://www.oursite.com/ordering',
-            "context": "deliveries"
-        }
-    }
-)
+# training_data.update(
+#     {
+#         "deliveries_yes": {
+#             "queries": ["Yes", "Confirm", "Affirmative", "Indeed", "Certainly", "Sure", "Yes thanks"],
+#             "response": 'You can order online from http://www.oursite.com/ordering',
+#             "context": "deliveries"
+#         }
+#     }
+# )
 
 training_data.update(
     {
@@ -84,16 +84,16 @@ training_data.update(
         }
     }
 )
-
-training_data.update(
-    {
-        "deliveries_no": {
-            "queries": ["No", "Negative", "Not at all", "Nope", "No thanks"],
-            "response": 'If you do not wish to order online you can order over the phone at 0412345353',
-            "context": "deliveries"
-        }
-    }
-)
+# 
+# training_data.update(
+#     {
+#         "deliveries_no": {
+#             "queries": ["No", "Negative", "Not at all", "Nope", "No thanks"],
+#             "response": 'If you do not wish to order online you can order over the phone at 0412345353',
+#             "context": "deliveries"
+#         }
+#     }
+# )
 
 training_data.update(
     {
