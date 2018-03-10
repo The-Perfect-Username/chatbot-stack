@@ -11,10 +11,11 @@ from nltk import ngrams
 
 class BowDocument:
     def __init__(self):
-        self.tokens = []
+        self.tokens = {'unigrams': [], 'bigrams': [], 'trigrams': []}
         self.stemmer = PorterStemmer()
         self.corpus_length = 0
-        self.corpus_terms = {}
+        self.corpus_terms = {'unigrams': {}, 'bigrams': {}, 'trigrams': {}}
+        self.ngrams = {'1': 'unigrams', '2': 'bigrams', '3': 'trigrams'}
 
     def classify(self, queries=[]):
         if len(queries) == 0:
@@ -22,6 +23,7 @@ class BowDocument:
 
         for query in queries:
             stemmed_words = self.create_stem_words(query)
+            self.corpus_length += len(stemmed_words)
             self.create_bag_of_words(stemmed_words)
 
         self.process_corpus(self.tokens)
@@ -32,28 +34,26 @@ class BowDocument:
         return [self.stemmer.stem(word) for word in words.split()]
 
     def create_bag_of_words(self, stemmed_words):
-        self.tokens.extend(stemmed_words)
+        self.tokens['unigrams'].extend(stemmed_words)
 
         if len(stemmed_words) > 1:
             self.find_ngrams(stemmed_words)
 
         return self.tokens
 
-    def process_corpus(self, tokens=[]):
-        for stemmed_word in tokens:
-            if stemmed_word not in self.corpus_terms:
-                self.corpus_length += 1
-                self.corpus_terms[stemmed_word] = 1
-            else:
-                self.corpus_length += 1
-                self.corpus_terms[stemmed_word] += 1
+    def process_corpus(self, tokens={}):
+        for ngram in tokens:
+            for stemmed_word in tokens[ngram]:
+                if stemmed_word not in self.corpus_terms[ngram]:
+                    self.corpus_terms[ngram][stemmed_word] = 1
+                else:
+                    self.corpus_terms[ngram][stemmed_word] += 1
 
     def find_ngrams(self, stemmed_words):
         len_of_stemmed_words = len(stemmed_words)
-
         if len_of_stemmed_words > 1:
             for i in range(2, 4):
                 if (len_of_stemmed_words >= i):
-                    self.tokens.extend([' '.join(n) for n in ngrams(stemmed_words, i)])
+                    self.tokens[self.ngrams[str(i)]].extend([' '.join(n) for n in ngrams(stemmed_words, i)])
 
         return self.tokens

@@ -11,30 +11,55 @@ response_messages = {}
 context_messages = {}
 classifier = {}
 
-for data in training_data:
-    queries = training_data[data]['queries']
+for classification_label in training_data:
+    queries = training_data[classification_label]['queries']
+    response_messages[classification_label] = training_data[classification_label]['response']
+
     B = BowDocument()
     B.classify(queries=queries)
-    classifier[data] = {
+
+    classifier[classification_label] = {
         'corpus_terms': B.corpus_terms,
         'corpus_length': B.corpus_length
         }
 
+def get_score(corpus, stemmed_query):
+    score = 0
+    for query_token in stemmed_query:
+        if query_token in corpus:
+            score += (1 / corpus[query_token])
+    return score
 
-query = "I would like to order something online"
-Query = BowDocument()
-Query.classify(queries=[query])
-query = Query.corpus_terms
+while True:
+    query = input()
+    Query = BowDocument()
+    Query.classify(queries=[query])
+    query = Query.corpus_terms
 
-training_set = {}
-for classification_label in classifier:
-    if classifier[classification_label]['corpus_length'] > 0:
-        TS = TrainingSet()
-        training_set.update({
-            classification_label: TS.start(classification_label=classification_label, training_data=classifier, stemmed_query_terms=query)
-        })
+    training_set = {}
 
-print (training_set)
+    responses = {}
+
+    for classification_label in classifier:
+        score = 0
+        if classifier[classification_label]['corpus_length'] > 0:
+
+            current_corpus = classifier[classification_label]['corpus_terms']
+
+            for ngram in current_corpus:
+
+                score += get_score(current_corpus[ngram], query[ngram])
+
+                if classification_label in responses:
+                    responses[classification_label] += score
+                else:
+                    responses[classification_label] = score
+
+    sorted_responses = dict(sorted(responses.items(), key=lambda x:x[1], reverse=True))
+
+    print (response_messages[next(iter(sorted_responses))])
+
+# print (training_set)
 
 
 # stemmer = PorterStemmer()

@@ -34,7 +34,7 @@ training_data.update(
 training_data.update(
     {
         "delivery_suburbs": {
-            "queries": [],
+            "queries": ['*'],
             "response": lambda user_input: "Yes we deliver to you! Would you like to order online?" if user_input.lower() in suburbs else "No sorry, we don't.",
             "context": "deliveries",
             'next_class': ['deliveries_yes', 'deliveries_no']
@@ -84,7 +84,7 @@ training_data.update(
         }
     }
 )
-# 
+#
 # training_data.update(
 #     {
 #         "deliveries_no": {
@@ -103,7 +103,7 @@ training_data.update(
                     "What is the name of your company?",
                     "What are you called?",
                     "What is the name of your business?",
-                    "What is your businesses name?",
+                    "What is your business' name?",
                     "What is the name of your organisation or business?",
                     "What is the name of your company?"
                 ],
