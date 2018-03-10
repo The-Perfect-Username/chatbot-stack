@@ -6,6 +6,26 @@ current_context = None
 
 training_data.update(
     {
+        "problem_acknowledgment": {
+            "queries": [
+                "I would like to report a problem",
+                "I found a problem and just wanted to report it",
+                "I came across a problem",
+                "I would like to report a problem I came across",
+                "I would like to report an issue I came across",
+                "I found an issue and just wanted to report it",
+                "I found a problem and would like to report it",
+                "I seemed to have found a problem",
+                "I seemed to have discovered a problem"
+            ],
+            "response": "What kind of issue was it? \n\n a) Technical \n b) Sexual",
+            "context": "problem_reporting"
+        }
+    }
+)
+
+training_data.update(
+    {
         "do_you_deliver_to_me": {
             "queries": [
                 "Can you deliver to my location?"

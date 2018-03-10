@@ -56,8 +56,8 @@ while True:
                     responses[classification_label] = score
 
     sorted_responses = dict(sorted(responses.items(), key=lambda x:x[1], reverse=True))
-
-    print (response_messages[next(iter(sorted_responses))])
+    print (sorted_responses)
+    # print (response_messages[sorted_response])
 
 # print (training_set)
 
